@@ -26,18 +26,18 @@ jobs:
         with:
           gradle-version: 8.9
 
-      - name: Build debug APK
-        run: gradle -p waqt-android --no-daemon assembleDebug
+      - name: Build signed release APK
+        run: gradle -p waqt-android --no-daemon assembleRelease
 
       - uses: actions/upload-artifact@v4
         with:
           name: waqt-apk
-          path: waqt-android/app/build/outputs/apk/debug/app-debug.apk
+          path: waqt-android/app/build/outputs/apk/release/app-release.apk
 
       - name: Publish release with APK
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Waqt latest APK
-          body: "Download app-debug.apk, open it on your phone and allow install from this source."
-          files: waqt-android/app/build/outputs/apk/debug/app-debug.apk
+          body: "Download app-release.apk, open it on your phone and allow install from this source."
+          files: waqt-android/app/build/outputs/apk/release/app-release.apk
